@@ -12,12 +12,26 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+type num struct {
+	a int
+	b int
+}
+
+func (n num) add() int {
+
+	return n.a + n.b
+
+}
+
 func helloHandler(rw http.ResponseWriter, req *http.Request) {
 	rw.Write([]byte("hello!!!"))
 }
 
-func welcomeHandler(rw http.ResponseWriter, req *http.Request) {
+func welcomeHandler(w http.ResponseWriter, r *http.Request) {
 
-	//todo
-	rw.Write([]byte("welcome!!!"))
+	// localhost:8080/welcome/ram -> hello ram, welcome to team.
+
+	u := r.URL.RequestURI()
+
+	w.Write([]byte(u))
 }
