@@ -9,17 +9,9 @@ func main() {
 	fmt.Println("server started")
 	http.HandleFunc("/", helloHandler)
 	http.HandleFunc("/welcome/", welcomeHandler)
+	http.HandleFunc("/welcome/ram", ramhandler)
+	http.HandleFunc("/welcome/vamsi", vamsihandler)
 	http.ListenAndServe(":8080", nil)
-}
-
-type num struct {
-	a int
-	b int
-}
-
-func (n num) add() int {
-
-	return n.a + n.b
 
 }
 
@@ -29,9 +21,12 @@ func helloHandler(rw http.ResponseWriter, req *http.Request) {
 
 func welcomeHandler(w http.ResponseWriter, r *http.Request) {
 
-	// localhost:8080/welcome/ram -> hello ram, welcome to team.
-
-	u := r.URL.RequestURI()
-
-	w.Write([]byte(u))
+	w.Write([]byte("welcome to v groups!!!!"))
+}
+func ramhandler(w http.ResponseWriter, r *http.Request) {
+	//fmt.Fprintf(w, "hii %s, welcome to the team !", r.URL.Path[2:])
+	w.Write([]byte("Hii ram, welcome to v groups!!!!"))
+}
+func vamsihandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("hii vamsi, welcome to v groups !!!"))
 }
