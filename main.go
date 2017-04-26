@@ -10,7 +10,7 @@ func main() {
 	http.HandleFunc("/", helloHandler)
 	http.HandleFunc("/welcome/", welcomeHandler)
 	http.HandleFunc("/welcome/ram", ramhandler)
-	http.HandleFunc("/welcome/vamsi", vamsihandler)
+	http.HandleFunc("/welcome/vamsi/", vamsihandler)
 	http.ListenAndServe(":8080", nil)
 
 }
@@ -28,5 +28,9 @@ func ramhandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hii ram, welcome to v groups!!!!"))
 }
 func vamsihandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("hii vamsi, welcome to v groups !!!"))
+	//w.Write([]byte("hii vamsi, welcome to v groups !!!"))
+	u := r.URL.RequestURI()
+	//a := strings.Split(u, "/")
+	w.Write([]byte(u))
+
 }
