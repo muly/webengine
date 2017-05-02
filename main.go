@@ -15,7 +15,7 @@ func main() {
 	http.ListenAndServe(":8090", nil)
 }
 
-func templateHandler(w http.ResponseWriter, r *http.Request) {
+func tableHandler(w http.ResponseWriter, r *http.Request) {
 
 	//template.New("name")
 	t1 := template.Must(template.ParseFiles(
