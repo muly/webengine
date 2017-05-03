@@ -3,20 +3,36 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"text/template"
 )
 
 func main() {
 	fmt.Println("server started")
+
 	http.HandleFunc("/", helloHandler)
 	http.HandleFunc("/welcome/", welcomeHandler)
 	http.HandleFunc("/welcome/ram", ramhandler)
 	http.HandleFunc("/welcome/vamsi", vamsihandler)
 	http.ListenAndServe(":8080", nil)
 
+	http.HandleFunc("/table", tableHandler)
+	http.HandleFunc("/welcome", welcomeHandler)
+
+	http.ListenAndServe(":8090", nil)
 }
 
-func helloHandler(rw http.ResponseWriter, req *http.Request) {
-	rw.Write([]byte("hello!!!"))
+func tableHandler(w http.ResponseWriter, r *http.Request) {
+
+	//template.New("name")
+	t1 := template.Must(template.ParseFiles(
+		"public/table.html",
+	))
+
+	err := t1.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
 }
 
 func welcomeHandler(w http.ResponseWriter, r *http.Request) {
@@ -29,4 +45,15 @@ func ramhandler(w http.ResponseWriter, r *http.Request) {
 }
 func vamsihandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hii vamsi, welcome to v groups !!!"))
+
+	//template.New("name")
+	t1 := template.Must(template.ParseFiles(
+		"public/welcome.html",
+	))
+
+	err := t1.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
 }
