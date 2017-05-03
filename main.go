@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
 func main() {
-	fmt.Println("server started")
+	log.Println("server started")
 	http.HandleFunc("/", helloHandler)
 	http.HandleFunc("/welcome", welcomeHandler)
 	http.HandleFunc("/welcome/", vamsihandler)
